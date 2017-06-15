@@ -258,11 +258,11 @@ if(class_exists('Wpacc')) {
 }
 
 if(isset($wpacc)) {	
-    function wpacc_settings_link($links) {
+    function wpacc_settings_link2($links) {
         $settings_link = '<a href="admin.php?page=wp-add-custom-js_settings">' . __('Settings', 'wp-add-custom-js') . '</a>';
         array_unshift($links, $settings_link);
         return $links; 
     }
-    add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'wpacc_settings_link');
+    add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'wpacc_settings_link2');
 }
 ?>
