@@ -5,7 +5,7 @@ Plugin URI: https://github.com/vladimirghetau/
 Description: Add custom JS to the whole website and to specific posts, pages and custom post types.
 Version: 1.0.0
 Author: Vladimir Ghetau
-Author URI: https://github.com/vladimirghetau/
+Author URI: https://www.gibdata.com/
 Text Domain: wp-add-custom-js
 Domain Path: /languages/
 License: GPL2
