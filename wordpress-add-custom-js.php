@@ -53,7 +53,7 @@ if(!class_exists('Wpacc'))
 			load_plugin_textdomain( 'wp-add-custom-js', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 		}
 		
-		public static function uninstall() {
+		public static function uninstall2() {
 			self::delete_options();	
 			self::delete_custom_meta();
     }
@@ -145,8 +145,8 @@ if(!class_exists('Wpacc'))
 		
 		public function init_settings() {
 			register_setting(
-				'wpacc_group',
-				'wpacc_settings'
+				'wpacc_group2',
+				'wpacc_settings2'
 			);	
 			add_settings_section(
 					'wpacc_main_js',
@@ -172,16 +172,16 @@ if(!class_exists('Wpacc'))
 					__('Available post types', 'wp-add-custom-js'),
 					array( $this, 'post_types_checkboxes' ),
 					'wp-add-custom-js_settings',
-					'wpacc_post_types'          
+					'wpacc_post_types2'          
 			);
 		}
 		
 		public function delete_options() {
 			unregister_setting(
-				'wpacc_group',
-				'wpacc_settings'
+				'wpacc_group2',
+				'wpacc_settings2'
 			);
-			delete_option('wpacc_settings');	
+			delete_option('wpacc_settings2');	
 		}
 		
 		public function delete_custom_meta() {
@@ -202,7 +202,7 @@ if(!class_exists('Wpacc'))
 		}
 		
 		public function add_custom_js() {
-			$this->options = get_option( 'wpacc_settings' );
+			$this->options = get_option( 'wpacc_settings2' );
 
 			if ( isset($this->options['main_custom_js']) && $this->options['main_custom_js'] != '') {
 				if ( function_exists('icl_object_id') ) {
@@ -231,7 +231,7 @@ if(!class_exists('Wpacc'))
 			if ( is_single() || is_page() ) {
 				global $post;				
 				$enabled_post_types = array('post', 'page');				
-				$this->options = get_option( 'wpacc_settings' );
+				$this->options = get_option( 'wpacc_settings2' );
 				if ( isset($this->options['selected_post_types']) ) {
 					$enabled_post_types = array_merge( $enabled_post_types, $this->options['selected_post_types'] );
 				}
@@ -241,6 +241,7 @@ if(!class_exists('Wpacc'))
 				$single_custom_js = get_post_meta( $post->ID, '_single_add_custom_js', true );
 				if ( $single_custom_js !== '' ) {
 					$single_custom_js = str_replace ( '&gt;' , '>' , $single_custom_js );
+
 					$output = "<script type=\"text/javascript\">\n" . $single_custom_js . "\n</script>\n";
 					echo $output;
 				}
@@ -253,7 +254,7 @@ if(!class_exists('Wpacc'))
 
 if(class_exists('Wpacc')) {
 	add_action('template_redirect', array('Wpacc', 'display_custom_js'));
-	register_uninstall_hook(__FILE__, array('Wpacc', 'uninstall'));
+	register_uninstall_hook(__FILE__, array('Wpacc', 'uninstall2'));
 	$wpacc = new Wpacc();
 }
 
