@@ -4,7 +4,7 @@ A WP plugin for adding custom JavaScript to Wordpress.
 
 ## Install
 
-### From GitHub
+#### From GitHub
 
 * Click "Clone or Download" > Download ZIP. 
 * Upload the ZIP file in your wordpress (via WP-Admin)
@@ -12,7 +12,7 @@ A WP plugin for adding custom JavaScript to Wordpress.
 * A menu item "Add Custom JS" will show up in the admin menu (lower in the menu).
 
 
-### Wordpress
+#### Wordpress
 
 Coming soon, waiting for the plugin to be accepted by [WordPress.org Plugins](wordpress.org/plugins).
 
