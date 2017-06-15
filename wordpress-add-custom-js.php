@@ -32,9 +32,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 if (!defined('ABSPATH')) die ('No direct access allowed');
 
-if(!class_exists('Wpacc'))
+if(!class_exists('Wpacc2'))
 {
-    class Wpacc
+    class Wpacc2
     {
 		private $options;
 		
@@ -59,7 +59,7 @@ if(!class_exists('Wpacc'))
     }
 		
 		public function add_meta_box( $post_type ) {
-			$this->options = get_option( 'wpacc_settings' );			
+			$this->options = get_option( 'wpacc_settings2' );			
 			$post_types = array('post', 'page');			
 			if ( isset($this->options['selected_post_types']) ) {
 				$post_types = array_merge( $post_types, $this->options['selected_post_types'] );
@@ -96,17 +96,17 @@ if(!class_exists('Wpacc'))
 		}
 		
 		public function add_menu() {
-			global $wpacc_settings_page;
-			$wpacc_settings_page = add_menu_page( __('Wordpress Add Custom JS', 'wp-add-custom-js'), __('Add Custom JS', 'wp-add-custom-js'), 'manage_options', 'wp-add-custom-js_settings', array($this, 'create_settings_page'), plugin_dir_url( __FILE__ ) . '/images/icon.png');
+			global $wpacc_settings_page2;
+			$wpacc_settings_page2 = add_menu_page( __('Wordpress Add Custom JS', 'wp-add-custom-js'), __('Add Custom JS', 'wp-add-custom-js'), 'manage_options', 'wp-add-custom-js_settings', array($this, 'create_settings_page'), plugin_dir_url( __FILE__ ) . '/images/icon.png');
 		}
 		
 		public function create_settings_page() {
-			$this->options = get_option( 'wpacc_settings' );
+			$this->options = get_option( 'wpacc_settings2' );
 			?>
 			<div class="wrap">
       	<h2><?php echo __('Wordpress Add Custom JS', 'wp-add-custom-js'); ?></h2>
         <form id="worpress_custom_js_form" method="post" action="options.php">
-        <?php settings_fields( 'wpacc_group' ); ?>
+        <?php settings_fields( 'wpacc_group2' ); ?>
         <?php do_settings_sections( 'wp-add-custom-js_settings' ); ?>
 				<?php submit_button( __('Save', 'wp-add-custom-js') ); ?>
 				</form>
@@ -124,7 +124,7 @@ if(!class_exists('Wpacc'))
 		
 		public function main_js_input() {
     	$custom_rules = isset( $this->options['main_custom_js'] ) ? esc_attr( $this->options['main_custom_js'] ) : '';
-			echo '<textarea name="wpacc_settings[main_custom_js]" style="width:100%; min-height:300px;">' . $custom_rules . '</textarea>';
+			echo '<textarea name="wpacc_settings2[main_custom_js]" style="width:100%; min-height:300px;">' . $custom_rules . '</textarea>';
     }
 		
 		public function print_section_2_info() {
@@ -139,7 +139,7 @@ if(!class_exists('Wpacc'))
 				} else {
 					$checked = '';
 				}
-				echo '<div style="margin-bottom:10px"><input type="checkbox" name="wpacc_settings[selected_post_types][]" value="' . $post_type->name . '"' . $checked . '>' . $post_type->label . '</div>'; // output checkbox
+				echo '<div style="margin-bottom:10px"><input type="checkbox" name="wpacc_settings2[selected_post_types][]" value="' . $post_type->name . '"' . $checked . '>' . $post_type->label . '</div>'; // output checkbox
 			}
     }
 		
@@ -162,7 +162,7 @@ if(!class_exists('Wpacc'))
 					'wpacc_main_js'          
 			);
 			add_settings_section(
-					'wpacc_post_types',
+					'wpacc_post_types2',
 					__('Post types', 'wp-add-custom-js'),
 					array( $this, 'print_section_2_info' ),
 					'wp-add-custom-js_settings'
@@ -252,13 +252,13 @@ if(!class_exists('Wpacc'))
     }
 }
 
-if(class_exists('Wpacc')) {
-	add_action('template_redirect', array('Wpacc', 'display_custom_js'));
-	register_uninstall_hook(__FILE__, array('Wpacc', 'uninstall2'));
-	$wpacc = new Wpacc();
+if(class_exists('Wpacc2')) {
+	add_action('template_redirect', array('Wpacc2', 'display_custom_js'));
+	register_uninstall_hook(__FILE__, array('Wpacc2', 'uninstall2'));
+	$wpacc2 = new Wpacc2();
 }
 
-if(isset($wpacc)) {	
+if(isset($wpacc2)) {	
     function wpacc_settings_link2($links) {
         $settings_link = '<a href="admin.php?page=wp-add-custom-js_settings">' . __('Settings', 'wp-add-custom-js') . '</a>';
         array_unshift($links, $settings_link);
